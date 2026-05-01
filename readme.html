@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Karthika Krishna — AI/ML Tech Stack</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #070b14;
+    --surface: #0d1526;
+    --border: rgba(255,255,255,0.07);
+    --text: #e8eaf6;
+    --muted: #7986a3;
+    --accent: #00e5ff;
+    --accent2: #7c4dff;
+    --accent3: #69ff47;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid noise texture */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Glow orbs */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.18;
+  }
+  .orb1 { width: 600px; height: 600px; background: var(--accent2); top: -200px; right: -150px; }
+  .orb2 { width: 500px; height: 500px; background: var(--accent); bottom: -150px; left: -100px; }
+
+  .wrapper { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 60px 32px 80px; }
+
+  /* HEADER */
+  header { text-align: center; margin-bottom: 70px; }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    border: 1px solid rgba(0,229,255,0.3);
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+    animation: fadeIn 0.6s ease both;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    animation: slideUp 0.7s ease both 0.1s;
+  }
+
+  h1 span {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    margin-top: 16px;
+    color: var(--muted);
+    font-size: 1rem;
+    font-family: 'Space Mono', monospace;
+    animation: fadeIn 0.8s ease both 0.3s;
+  }
+
+  /* FILTER TABS */
+  .filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 52px;
+    animation: fadeIn 0.8s ease both 0.4s;
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    padding: 8px 18px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(0,229,255,0.05);
+  }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 60%, var(--card-color, rgba(0,229,255,0.06)));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: var(--card-color, var(--accent));
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 20px var(--card-glow, rgba(0,229,255,0.15));
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card.hidden { display: none; }
+
+  .icon-wrap {
+    width: 64px; height: 64px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    background: var(--card-bg, rgba(0,229,255,0.08));
+    border: 1px solid var(--card-border, rgba(0,229,255,0.2));
+    transition: transform 0.25s ease;
+    position: relative;
+    z-index: 1;
+  }
+
+  .card:hover .icon-wrap { transform: scale(1.1) rotate(-4deg); }
+
+  .card-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-align: center;
+    position: relative; z-index: 1;
+  }
+
+  .card-cat {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    position: relative; z-index: 1;
+  }
+
+  .card-desc {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.5;
+    position: relative; z-index: 1;
+    display: none;
+  }
+
+  .card:hover .card-desc { display: block; }
+  .card:hover .card-cat { display: none; }
+
+  /* BADGE */
+  .badge {
+    position: absolute;
+    top: 10px; right: 10px;
+    font-family: 'Space Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 1px;
+    padding: 3px 7px;
+    border-radius: 2px;
+    background: rgba(0,229,255,0.12);
+    color: var(--accent);
+    border: 1px solid rgba(0,229,255,0.2);
+    text-transform: uppercase;
+  }
+
+  /* STAT BAR */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 60px 0 0;
+    padding: 32px;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+    animation: fadeIn 1s ease both 0.6s;
+  }
+
+  .stat { text-align: center; }
+  .stat-num {
+    font-size: 2.4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* TOOLTIP MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--surface);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 480px;
+    width: 90%;
+    text-align: center;
+    animation: scaleIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  .modal-icon { font-size: 56px; margin-bottom: 16px; }
+  .modal-name { font-size: 1.6rem; font-weight: 800; margin-bottom: 8px; }
+  .modal-cat {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .modal-desc { color: #a0aec0; font-size: 0.95rem; line-height: 1.7; margin-bottom: 24px; }
+  .modal-used {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(0,229,255,0.08);
+    border: 1px solid rgba(0,229,255,0.2);
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: inline-block;
+  }
+  .modal-close {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    padding: 10px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+  }
+  .modal-close:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes popIn { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
+  @keyframes scaleIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+
+  /* Stagger */
+  .card:nth-child(1)  { animation-delay: 0.05s; }
+  .card:nth-child(2)  { animation-delay: 0.10s; }
+  .card:nth-child(3)  { animation-delay: 0.15s; }
+  .card:nth-child(4)  { animation-delay: 0.20s; }
+  .card:nth-child(5)  { animation-delay: 0.25s; }
+  .card:nth-child(6)  { animation-delay: 0.30s; }
+  .card:nth-child(7)  { animation-delay: 0.35s; }
+  .card:nth-child(8)  { animation-delay: 0.40s; }
+  .card:nth-child(9)  { animation-delay: 0.45s; }
+  .card:nth-child(10) { animation-delay: 0.50s; }
+  .card:nth-child(11) { animation-delay: 0.55s; }
+  .card:nth-child(12) { animation-delay: 0.60s; }
+  .card:nth-child(13) { animation-delay: 0.65s; }
+  .card:nth-child(14) { animation-delay: 0.70s; }
+  .card:nth-child(15) { animation-delay: 0.75s; }
+  .card:nth-child(16) { animation-delay: 0.80s; }
+  .card:nth-child(17) { animation-delay: 0.85s; }
+  .card:nth-child(18) { animation-delay: 0.90s; }
+  .card:nth-child(19) { animation-delay: 0.95s; }
+  .card:nth-child(20) { animation-delay: 1.00s; }
+  .card:nth-child(21) { animation-delay: 1.05s; }
+  .card:nth-child(22) { animation-delay: 1.10s; }
+  .card:nth-child(23) { animation-delay: 1.15s; }
+  .card:nth-child(24) { animation-delay: 1.20s; }
+
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+    .stats { gap: 24px; }
+    h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<div class="wrapper">
+  <header>
+    <div class="tag">⚡ AIML_Learnings · GitHub: KARTHIKAKRISHNA123</div>
+    <h1>Full <span>Tech Stack</span><br/>A to Z</h1>
+    <p class="subtitle">// Every tool. Every framework. Every layer.</p>
+  </header>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="core-ml">Core ML</button>
+    <button class="filter-btn" data-filter="deep-learning">Deep Learning</button>
+    <button class="filter-btn" data-filter="nlp">NLP</button>
+    <button class="filter-btn" data-filter="data">Data & Viz</button>
+    <button class="filter-btn" data-filter="deployment">Deployment</button>
+    <button class="filter-btn" data-filter="fullstack">Full Stack</button>
+    <button class="filter-btn" data-filter="cloud">Cloud</button>
+    <button class="filter-btn" data-filter="devtools">Dev Tools</button>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num" id="s-total">0</div><div class="stat-label">Technologies</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Notebooks</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">ML Domains</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Cloud Platforms</div></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-icon" id="m-icon"></div>
+    <div class="modal-name" id="m-name"></div>
+    <div class="modal-cat" id="m-cat"></div>
+    <div class="modal-used" id="m-used"></div>
+    <div class="modal-desc" id="m-desc"></div>
+    <button class="modal-close" onclick="closeModal()">✕ &nbsp;CLOSE</button>
+  </div>
+</div>
+
+<script>
+const stack = [
+  // Core ML
+  { name:"Python", icon:"🐍", cat:"core-ml", color:"#3776AB", glow:"rgba(55,118,171,0.3)", desc:"Primary programming language for all AI/ML notebooks. Used across ANN, CNN, and NLP experiments.", used:"ANN · CNN · NLP · All Notebooks", badge:"Primary" },
+  { name:"scikit-learn", icon:"🔬", cat:"core-ml", color:"#F7931E", glow:"rgba(247,147,30,0.3)", desc:"Industry-standard ML library. Used for Iris dataset loading, train/test splits, and One-Hot Encoding in ANN with Iris.", used:"ANN_with_Iris.ipynb" },
+  { name:"NumPy", icon:"🔢", cat:"core-ml", color:"#013243", glow:"rgba(0,150,200,0.25)", desc:"Foundational numerical computing library. Used for array operations, data manipulation in CNN and ANN notebooks.", used:"CNN · ANN · MNIST" },
+  { name:"Pandas", icon:"🐼", cat:"data", color:"#150458", glow:"rgba(21,4,88,0.4)", desc:"Data manipulation and analysis library. Used for structured data handling in ML preprocessing pipelines.", used:"Data Preprocessing" },
+
+  // Deep Learning
+  { name:"TensorFlow", icon:"🔶", cat:"deep-learning", color:"#FF6F00", glow:"rgba(255,111,0,0.3)", desc:"End-to-end open-source ML platform. Core framework for building ANN and CNN models from scratch.", used:"ANN · CNN · MNIST · CIFAR-10", badge:"Heavy Use" },
+  { name:"Keras", icon:"🧠", cat:"deep-learning", color:"#D00000", glow:"rgba(208,0,0,0.3)", desc:"High-level neural network API running on top of TensorFlow. Used for layers, models, and dataset loading (mnist, cifar10).", used:"Basic ANN · CNN_mnist_and_cifar" },
+  { name:"CNN", icon:"🖼️", cat:"deep-learning", color:"#7c4dff", glow:"rgba(124,77,255,0.3)", desc:"Convolutional Neural Networks implemented for image classification on MNIST (handwritten digits) and CIFAR-10 (objects).", used:"CNN.ipynb · CNN_mnist_and_cifar.ipynb" },
+  { name:"ANN", icon:"⚡", cat:"deep-learning", color:"#00bcd4", glow:"rgba(0,188,212,0.3)", desc:"Artificial Neural Networks built from scratch using TensorFlow/Keras. Applied to Iris flower classification task.", used:"ANN_with_Iris.ipynb · Basic_ANN_Implementation.ipynb" },
+  { name:"MNIST", icon:"✏️", cat:"deep-learning", color:"#4caf50", glow:"rgba(76,175,80,0.25)", desc:"Benchmark handwritten digit dataset (70,000 images). Used for CNN training and evaluation.", used:"CNN_mnist_and_cifar.ipynb" },
+  { name:"CIFAR-10", icon:"🚗", cat:"deep-learning", color:"#e91e63", glow:"rgba(233,30,99,0.3)", desc:"10-class image dataset (airplanes, cars, birds etc.). Used for multi-class CNN classification.", used:"CNN_mnist_and_cifar.ipynb" },
+  { name:"Iris Dataset", icon:"🌸", cat:"core-ml", color:"#9c27b0", glow:"rgba(156,39,176,0.3)", desc:"Classic flower classification dataset (150 samples, 3 classes). Used as benchmark for ANN implementation.", used:"ANN_with_Iris.ipynb" },
+
+  // NLP
+  { name:"NLTK", icon:"💬", cat:"nlp", color:"#2196f3", glow:"rgba(33,150,243,0.3)", desc:"Natural Language Toolkit. Used for text cleaning, tokenization, stopword removal, stemming, and lemmatization.", used:"NLP_Practice.ipynb", badge:"NLP Core" },
+  { name:"Tokenization", icon:"✂️", cat:"nlp", color:"#00acc1", glow:"rgba(0,172,193,0.25)", desc:"Word tokenization using NLTK's word_tokenize(). Splits raw text into individual word tokens for downstream NLP tasks.", used:"NLP_Practice.ipynb" },
+  { name:"Stemming", icon:"🌿", cat:"nlp", color:"#43a047", glow:"rgba(67,160,71,0.25)", desc:"PorterStemmer used to reduce words to their root form (e.g. 'running' → 'run') for normalization.", used:"NLP_Practice.ipynb" },
+  { name:"Lemmatization", icon:"📖", cat:"nlp", color:"#fb8c00", glow:"rgba(251,140,0,0.25)", desc:"WordNetLemmatizer for morphologically correct word reduction. More accurate than stemming for NLP pipelines.", used:"NLP_Practice.ipynb" },
+
+  // Data & Viz
+  { name:"Matplotlib", icon:"📊", cat:"data", color:"#11557c", glow:"rgba(17,85,124,0.3)", desc:"Core Python visualization library. Used in CNN notebooks to plot training accuracy, loss curves, and sample images.", used:"CNN.ipynb · CNN_mnist_and_cifar" },
+  { name:"Google Colab", icon:"🔵", cat:"devtools", color:"#F9AB00", glow:"rgba(249,171,0,0.3)", desc:"Cloud-hosted Jupyter environment with free GPU. All 5 AIML notebooks have Colab badges and were developed here.", used:"All Notebooks", badge:"Dev Env" },
+  { name:"Jupyter", icon:"📓", cat:"devtools", color:"#F37626", glow:"rgba(243,118,38,0.3)", desc:"Notebook format (.ipynb) used for all experiments. Enables mixing code, markdown, and visualizations.", used:"All .ipynb Files" },
+
+  // Full Stack
+  { name:"React.js", icon:"⚛️", cat:"fullstack", color:"#61DAFB", glow:"rgba(97,218,251,0.25)", desc:"Frontend library for building interactive UIs. Used in Netflix clone, placement dashboard, and weather projects.", used:"Netflix Clone · Placement Dashboard" },
+  { name:"Node.js", icon:"🟢", cat:"fullstack", color:"#339933", glow:"rgba(51,153,51,0.25)", desc:"JavaScript runtime for backend services. Powers REST APIs and server-side logic in full-stack projects.", used:"Full-Stack Projects" },
+  { name:"MongoDB", icon:"🍃", cat:"fullstack", color:"#47A248", glow:"rgba(71,162,72,0.25)", desc:"NoSQL document database. Used with Mongoose ODM for data modelling in MERN stack applications.", used:"MERN Stack Projects" },
+  { name:"Java", icon:"☕", cat:"fullstack", color:"#ED8B00", glow:"rgba(237,139,0,0.3)", desc:"Object-oriented language used for backend development and interview preparation. Core CS foundation.", used:"Interview Prep · Backend" },
+
+  // Deployment
+  { name:"Streamlit", icon:"🎈", cat:"deployment", color:"#FF4B4B", glow:"rgba(255,75,75,0.3)", desc:"Python web app framework. Used to deploy the HomeVista house price predictor on Streamlit Community Cloud.", used:"HomeVista Predictor", badge:"Deployed" },
+  { name:"Azure", icon:"☁️", cat:"cloud", color:"#0089D6", glow:"rgba(0,137,214,0.3)", desc:"Microsoft cloud platform. Deployed Streamlit app on Azure App Service (Python 3.11, southeastasia region). Port fixed to 8501.", used:"Azure App Service Deploy", badge:"Live" },
+  { name:"GitHub", icon:"🐙", cat:"devtools", color:"#ffffff", glow:"rgba(255,255,255,0.15)", desc:"Version control and code hosting. AIML_Learnings repo and HomeVista Predictor hosted under KARTHIKAKRISHNA123.", used:"All Projects" },
+];
+
+const grid = document.getElementById('grid');
+const modal = document.getElementById('modal');
+
+function renderCards(filter) {
+  grid.innerHTML = '';
+  const filtered = filter === 'all' ? stack : stack.filter(t => t.cat === filter);
+  document.getElementById('s-total').textContent = stack.length;
+
+  filtered.forEach((tech, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.setProperty('--card-color', tech.color);
+    card.style.setProperty('--card-glow', tech.glow);
+    card.style.setProperty('--card-bg', tech.glow.replace('0.3','0.1').replace('0.25','0.08').replace('0.15','0.06'));
+    card.style.setProperty('--card-border', tech.color + '44');
+    card.style.animationDelay = (i * 0.04) + 's';
+
+    card.innerHTML = `
+      ${tech.badge ? `<div class="badge">${tech.badge}</div>` : ''}
+      <div class="icon-wrap">${tech.icon}</div>
+      <div class="card-name">${tech.name}</div>
+      <div class="card-cat">${tech.cat.replace('-',' ')}</div>
+      <div class="card-desc">${tech.desc.substring(0, 80)}…</div>
+    `;
+
+    card.addEventListener('click', () => openModal(tech));
+    grid.appendChild(card);
+  });
+}
+
+function openModal(tech) {
+  document.getElementById('m-icon').textContent = tech.icon;
+  document.getElementById('m-name').textContent = tech.name;
+  document.getElementById('m-cat').textContent = tech.cat.replace('-', ' ').toUpperCase() + ' · AIML STACK';
+  document.getElementById('m-used').textContent = '📁 ' + tech.used;
+  document.getElementById('m-desc').textContent = tech.desc;
+  modal.classList.add('open');
+}
+
+function closeModal() { modal.classList.remove('open'); }
+modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderCards(btn.dataset.filter);
+  });
+});
+
+// Count up animation
+function countUp(el, target, duration) {
+  let start = 0;
+  const step = target / (duration / 16);
+  const timer = setInterval(() => {
+    start = Math.min(start + step, target);
+    el.textContent = Math.floor(start);
+    if(start >= target) clearInterval(timer);
+  }, 16);
+}
+
+renderCards('all');
+setTimeout(() => countUp(document.getElementById('s-total'), stack.length, 1200), 600);
+</script>
+</body>
+</html>
