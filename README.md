@@ -1,210 +1,386 @@
-# 🧠 AIML Learnings
+# 🚀 AIML Workshop
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
   <img src="https://img.shields.io/badge/TensorFlow-2.x-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white"/>
   <img src="https://img.shields.io/badge/Keras-D00000?style=for-the-badge&logo=keras&logoColor=white"/>
   <img src="https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white"/>
-  <img src="https://img.shields.io/badge/NLTK-2496ED?style=for-the-badge&logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Microsoft%20Azure-0089D6?style=for-the-badge&logo=microsoftazure&logoColor=white"/>
+  <img src="https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white"/>
   <img src="https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Google%20Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=black"/>
 </p>
 
 <p align="center">
-  A structured collection of hands-on AI/ML notebooks covering <strong>Artificial Neural Networks</strong>, <strong>Convolutional Neural Networks</strong>, and <strong>Natural Language Processing</strong> — built and executed on Google Colab.
+  A comprehensive hands-on AI/ML engineering repository covering 
+  <strong>Machine Learning</strong>, 
+  <strong>Deep Learning</strong>, 
+  <strong>Natural Language Processing</strong>, 
+  <strong>Azure AI Services</strong>, 
+  <strong>LLMs</strong>, 
+  <strong>AI Agents</strong>, and 
+  <strong>Cloud AI Deployment</strong>.
 </p>
 
 ---
 
-## 📁 Repository Structure
+# 📚 Repository Vision
 
-```
-AIML_Learnings/
+AIML Workshop is designed as a centralized AI engineering workspace that combines:
+
+- Foundational AI/ML learning
+- Practical deep learning implementations
+- NLP pipelines
+- Computer Vision systems
+- Azure Cognitive Services
+- GPT-powered AI applications
+- AI Agents and RAG systems
+- Streamlit deployments
+- Cloud-native AI engineering
+
+This repository evolves as a long-term AI engineering knowledge base and experimentation lab.
+
+---
+
+# 📁 Repository Structure
+
+```bash
+AIML-Workshop/
 │
-├── ANN_with_Iris.ipynb              # ANN applied to Iris flower classification
-├── Basic_ANN_Implementation.ipynb  # ANN fundamentals with TensorFlow/Keras
-├── CNN.ipynb                        # CNN architecture from scratch
-├── CNN_mnist_and_cifar.ipynb        # CNN on MNIST & CIFAR-10 datasets
-├── NLP_Practice.ipynb               # NLP pipeline with NLTK
-└── test.ipynb                       # Scratch / sandbox notebook
+├── Machine_Learning/
+│   ├── ANN_with_Iris.ipynb
+│   ├── Basic_ANN_Implementation.ipynb
+│   └── ML experiments
+│
+├── Deep_Learning/
+│   ├── CNN.ipynb
+│   ├── CNN_mnist_and_cifar.ipynb
+│   └── Deep learning architectures
+│
+├── NLP/
+│   ├── NLP_Practice.ipynb
+│   ├── sentiment.py
+│   ├── language_detection.py
+│   ├── key_phrases.py
+│   └── pii_detection.py
+│
+├── Azure_AI/
+│   ├── Azure_Project/
+│   ├── ai-foundry/
+│   ├── agents/
+│   └── nlp_demo/
+│
+├── Computer_Vision/
+│   ├── cv.py
+│   ├── objects.py
+│   ├── tags.py
+│   └── app.py
+│
+├── Generative_AI/
+│   ├── streaming.py
+│   ├── tool_passing.py
+│   ├── pirate_assistant.py
+│   └── multi_conversion.py
+│
+├── AI_Agents/
+│   ├── helloWorld.py
+│   ├── multidemo.py
+│   ├── rag.py
+│   └── policy.txt
+│
+├── Streamlit_Apps/
+│   ├── Vision AI Demo
+│   └── Neon NLP Studio
+│
+└── README.md
 ```
 
 ---
 
-## 📓 Notebooks Overview
-
-### 1. 🌸 ANN with Iris Dataset
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/KARTHIKAKRISHNA123/AIML_Learnings/blob/main/ANN_with_Iris.ipynb)
-
-Implements a multi-layer Artificial Neural Network using the classic **Iris flower dataset** (150 samples, 3 classes).
-
-**Key Concepts:**
-- Dataset loading via `sklearn.datasets.load_iris`
-- Train/test split using `sklearn.model_selection`
-- One-Hot Encoding with `sklearn.preprocessing.OneHotEncoder`
-- ANN model built and trained with **TensorFlow / Keras**
-- Model evaluation and accuracy metrics
-
-**Tech Stack:** `TensorFlow` · `Keras` · `scikit-learn` · `NumPy`
+# 🧠 Core Learning Domains
 
 ---
 
-### 2. ⚡ Basic ANN Implementation
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/KARTHIKAKRISHNA123/AIML_Learnings/blob/main/Basic_ANN_Implementation.ipynb)
+# 🤖 Machine Learning & Neural Networks
 
-Foundational implementation of an Artificial Neural Network from scratch using TensorFlow's Keras API.
+Hands-on implementations of:
 
-**Key Concepts:**
-- TensorFlow version check and GPU detection (`tf.config.list_physical_devices`)
-- Layer-by-layer ANN construction using `tensorflow.keras.layers`
-- Dense layers, activations, loss functions, and optimizers
-- Training loop and validation
+- Artificial Neural Networks (ANN)
+- TensorFlow/Keras fundamentals
+- Iris classification
+- Training pipelines
+- Model evaluation
 
-**Tech Stack:** `TensorFlow` · `Keras` · `NumPy`
+### Key Concepts
 
----
+- Dense layers
+- Activation functions
+- Optimizers
+- Loss functions
+- Backpropagation
+- Model training and validation
 
-### 3. 🖼️ CNN Architecture
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/KARTHIKAKRISHNA123/AIML_Learnings/blob/main/CNN.ipynb)
+### Tech Stack
 
-Builds a Convolutional Neural Network architecture from first principles, exploring spatial feature extraction.
-
-**Key Concepts:**
-- Convolutional layers, pooling, and flattening
-- Image data preprocessing and normalization
-- Visualization of feature maps using Matplotlib
-
-**Tech Stack:** `TensorFlow` · `Keras` · `NumPy` · `Matplotlib`
-
----
-
-### 4. 🔢 CNN on MNIST & CIFAR-10
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/KARTHIKAKRISHNA123/AIML_Learnings/blob/main/CNN_mnist_and_cifar.ipynb)
-
-Applies CNN models to two industry-standard benchmark datasets for image classification.
-
-**Key Concepts:**
-- **MNIST** — 70,000 grayscale handwritten digit images (28×28), 10 classes
-- **CIFAR-10** — 60,000 color images (32×32×3), 10 object categories
-- Dataset loading via `tensorflow.keras.datasets`
-- Model building using `layers` and `models` API
-- Training, evaluation, and accuracy/loss visualization
-
-**Tech Stack:** `TensorFlow` · `Keras` · `NumPy` · `Matplotlib`
+- TensorFlow
+- Keras
+- scikit-learn
+- NumPy
 
 ---
 
-### 5. 💬 NLP Practice
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/KARTHIKAKRISHNA123/AIML_Learnings/blob/main/NLP_Practice.ipynb)
+# 🖼️ Deep Learning & Computer Vision
 
-End-to-end Natural Language Processing pipeline using NLTK, covering all core text preprocessing techniques.
+Implementation of CNN architectures and image analysis systems.
 
-**Key Concepts:**
+### Includes
 
-| Step | Method | Purpose |
-|------|--------|---------|
-| Text Cleaning | `re` (regex) | Lowercase, remove special chars |
-| Tokenization | `word_tokenize` | Split text into tokens |
-| Stopword Removal | `stopwords.words("english")` | Remove noise words |
-| Stemming | `PorterStemmer` | Reduce words to root form |
-| Lemmatization | `WordNetLemmatizer` | Morphologically correct normalization |
+- CNN architecture design
+- MNIST classification
+- CIFAR-10 classification
+- Image preprocessing
+- Feature extraction
+- Object detection
+- Image captioning
+- Image tagging
 
-**Tech Stack:** `NLTK` · `Python` · `re`
+### Azure Vision Features
+
+- AI-generated captions
+- Object detection with bounding boxes
+- Tag extraction with confidence scores
+
+### Tech Stack
+
+- TensorFlow
+- Keras
+- Azure AI Vision
+- Pillow
+- Matplotlib
 
 ---
 
-## 🛠️ Tech Stack
+# 💬 Natural Language Processing
+
+End-to-end NLP workflows using both traditional NLP and Azure AI Language Services.
+
+### Traditional NLP
+
+- Tokenization
+- Stopword removal
+- Stemming
+- Lemmatization
+- Regex-based preprocessing
+
+### Azure NLP Features
+
+- Sentiment analysis
+- Language detection
+- Key phrase extraction
+- PII detection and redaction
+
+### Tech Stack
+
+- NLTK
+- Azure AI Language
+- Python regex
+- Streamlit
+
+---
+
+# ☁️ Azure AI Engineering
+
+Production-oriented Azure AI integrations.
+
+### Services Used
+
+- Azure AI Vision
+- Azure AI Language
+- Azure AI Foundry
+- Azure AI Agents
+- Azure App Service
+
+### Features
+
+- Streamlit deployment on Azure
+- GPT-powered applications
+- Azure SDK integrations
+- Secure credential handling
+- Cloud AI experimentation
+
+---
+
+# 🤖 Generative AI & LLMs
+
+Experiments using GPT models through Azure AI Foundry.
+
+### Concepts Covered
+
+- Prompt engineering
+- Streaming responses
+- Multi-turn conversations
+- Function/tool calling
+- Assistant personas
+- OpenAI-compatible Azure APIs
+
+### Example Features
+
+- Real-time token streaming
+- Weather tool calling
+- Persona-controlled assistants
+- Context-aware chat systems
+
+---
+
+# 🧠 AI Agents & RAG
+
+Advanced AI engineering concepts using Azure AI Agents SDK.
+
+### Includes
+
+- Agent creation
+- Threads and runs
+- Multi-turn memory
+- Retrieval-Augmented Generation (RAG)
+- Vector stores
+- File search tools
+
+### RAG Workflow
+
+```text
+Document Upload → Vector Store → Retrieval → LLM Response
+```
+
+---
+
+# 🌐 Streamlit Applications
+
+Interactive AI applications deployed using Streamlit.
+
+### Included Apps
+
+| App | Description |
+|------|-------------|
+| Azure Vision AI Demo | AI captions, object detection, image tagging |
+| Neon NLP Studio | Sentiment analysis, PII detection, language detection |
+
+---
+
+# 🛠️ Full Tech Stack
 
 | Category | Technologies |
 |----------|-------------|
-| **Language** | Python 3.x |
-| **Deep Learning** | TensorFlow 2.x, Keras |
-| **ML Library** | scikit-learn |
-| **NLP** | NLTK (tokenize, stem, lemmatize, stopwords) |
-| **Data & Viz** | NumPy, Matplotlib |
-| **Datasets** | Iris, MNIST, CIFAR-10 |
-| **Environment** | Google Colab, Jupyter Notebook |
-| **Version Control** | Git, GitHub |
+| Language | Python 3.x |
+| ML/DL | TensorFlow, Keras, scikit-learn |
+| NLP | NLTK, Azure AI Language |
+| Cloud | Microsoft Azure |
+| LLMs | GPT-4.1 Nano |
+| Web Framework | Streamlit |
+| AI SDKs | Azure AI SDKs |
+| Visualization | Matplotlib |
+| Image Processing | Pillow |
+| Environment | Jupyter, Google Colab |
+| Version Control | Git, GitHub |
 
 ---
 
-## 🚀 Getting Started
+# 🚀 Getting Started
 
-### Run on Google Colab (Recommended)
+## 1. Clone Repository
 
-Click any **"Open in Colab"** badge above — no local setup required. Google Colab provides free GPU access for faster model training.
-
-### Run Locally
-
-**1. Clone the repository**
 ```bash
-git clone https://github.com/KARTHIKAKRISHNA123/AIML_Learnings.git
-cd AIML_Learnings
+git clone https://github.com/YOUR_USERNAME/AIML-Workshop.git
+cd AIML-Workshop
 ```
 
-**2. Create and activate a virtual environment**
+---
+
+## 2. Create Virtual Environment
+
 ```bash
 python -m venv venv
-source venv/bin/activate        # macOS/Linux
-venv\Scripts\activate           # Windows
 ```
 
-**3. Install dependencies**
+### Windows
+
 ```bash
-pip install tensorflow scikit-learn nltk numpy matplotlib jupyter
+venv\Scripts\activate
 ```
 
-**4. Download NLTK corpora** (required for NLP notebook)
-```python
-import nltk
-nltk.download("punkt")
-nltk.download("stopwords")
-nltk.download("wordnet")
-nltk.download("omw-1.4")
-```
+### macOS/Linux
 
-**5. Launch Jupyter**
 ```bash
-jupyter notebook
+source venv/bin/activate
 ```
 
 ---
 
-## 📊 Learning Outcomes
+## 3. Install Dependencies
 
-By working through these notebooks, you will understand:
-
-- How **Artificial Neural Networks** are constructed layer by layer and trained on real datasets
-- How **Convolutional Neural Networks** extract spatial features from images
-- How to benchmark CNN models on **MNIST** and **CIFAR-10**
-- How to build a complete **NLP preprocessing pipeline** — from raw text to clean, normalized tokens
-- How to use **TensorFlow/Keras** for model definition, compilation, training, and evaluation
-- How to use **scikit-learn** utilities for data splitting and encoding
-
----
-
-## 📌 Prerequisites
-
-- Basic Python programming
-- Familiarity with linear algebra and probability fundamentals
-- No prior deep learning experience required — notebooks are beginner-friendly
+```bash
+pip install tensorflow keras scikit-learn nltk matplotlib
+pip install azure-ai-textanalytics
+pip install azure-ai-vision-imageanalysis
+pip install azure-ai-agents
+pip install azure-ai-projects
+pip install azure-identity
+pip install openai
+pip install streamlit
+pip install pillow
+```
 
 ---
 
-## 👩‍💻 Author
+# 📊 Learning Outcomes
 
-**Karthika Krishna**
-AI/ML Learner · Full Stack Developer
-[![GitHub](https://img.shields.io/badge/GitHub-KARTHIKAKRISHNA123-181717?style=flat&logo=github)](https://github.com/KARTHIKAKRISHNA123)
+By working through this repository, you will learn:
+
+- Machine Learning fundamentals
+- Deep Learning architectures
+- CNN implementation
+- NLP preprocessing pipelines
+- Azure Cognitive Services
+- GPT integrations
+- AI Agents
+- RAG pipelines
+- Streamlit deployments
+- Cloud AI engineering workflows
 
 ---
 
-## 📄 License
+# 🎯 Repository Goals
 
-This repository is intended for educational purposes. Feel free to reference and learn from the code. Please credit the author if you use these materials in your own work.
+- Build strong AI engineering fundamentals
+- Explore cloud-native AI systems
+- Learn production AI workflows
+- Create deployable AI applications
+- Experiment with modern LLM ecosystems
+- Develop industry-ready AI engineering skills
+
+---
+
+# 👩‍💻 Author
+
+## Karthika Krishna
+
+AI/ML Learner · Azure AI Enthusiast · Full Stack Developer
+
+<p align="left">
+  <a href="https://github.com/KARTHIKAKRISHNA123">
+    <img src="https://img.shields.io/badge/GitHub-KARTHIKAKRISHNA123-181717?style=for-the-badge&logo=github"/>
+  </a>
+</p>
+
+---
+
+# 📄 License
+
+This repository is intended for educational and learning purposes.
+
+Feel free to explore, learn, and build upon the projects. Please credit the author when referencing this work.
 
 ---
 
 <p align="center">
-  Made with ❤️ and lots of <code>epochs</code>
+  Built with ☁️ Azure · 🤖 AI · 🧠 Deep Learning · 🐍 Python · 🚀 Curiosity
 </p>
